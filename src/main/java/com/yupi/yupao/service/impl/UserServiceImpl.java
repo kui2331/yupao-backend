@@ -2,6 +2,8 @@ package com.yupi.yupao.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yupi.yupao.common.ErrorCode;
 import com.yupi.yupao.exception.BusinessException;
 import com.yupi.yupao.model.domain.User;
@@ -15,7 +17,10 @@ import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -153,12 +158,45 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     /**
-     *   根据标签搜索用户。
+     *   根据标签搜索用户。(内存过滤版)
      * @param tagNameList  用户要搜索的标签
      * @return
      */
     @Override
     public List<User> searchUsersByTags(List<String> tagNameList){
+        if (CollectionUtils.isEmpty(tagNameList)){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //1.先查询所有用户
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        List<User> userList = userMapper.selectList(queryWrapper);
+        Gson gson = new Gson();
+        //2.判断内存中是否包含要求的标签 parallelStream()
+        return userList.stream().filter(user -> {
+            String tagstr = user.getTags();
+            if (StringUtils.isBlank(tagstr)){
+                return false;
+            }
+            Set<String> tempTagNameSet =  gson.fromJson(tagstr,new TypeToken<Set<String>>(){}.getType());
+            //java8  Optional 来判断空
+            tempTagNameSet = Optional.ofNullable(tempTagNameSet).orElse(new HashSet<>());
+            for (String tagName : tagNameList){
+                if (!tempTagNameSet.contains(tagName)){
+                    return false;
+                }
+            }
+            return true;
+        }).map(this::getSafetyUser).collect(Collectors.toList());
+    }
+
+    /**
+     * 根据标签搜索用户。(sql查询版)
+     * &#064;Deprecated  过时
+     * @param tagNameList  用户要搜索的标签
+     * @return
+     */
+    @Deprecated
+    private List<User> searchUsersByTagBySQL(List<String> tagNameList){
         if (CollectionUtils.isEmpty(tagNameList)){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
