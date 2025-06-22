@@ -89,4 +89,9 @@ public class User {
      * 标签 json 列表
      */
     private String tags;
+
+    /**
+     * 描述
+     */
+    private String profile;
 }
