@@ -16,7 +16,7 @@ spring:
   # 配置session超时时间
   session:
     timeout: 86400
-
+    store-type: redis
   # 配置接口文档
   mvc:
     pathmatch:
@@ -28,7 +28,7 @@ spring:
   redis:
     port: 6379
     host: localhost
-    database: 1
+    database: 0
 server:
   port: 8080
   servlet:

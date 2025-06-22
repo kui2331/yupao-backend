@@ -1,6 +1,5 @@
 package com.yupi.yupao.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,20 +13,14 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
- * @author Shier
- * @date 2023/02/02
  * 自定义 Swagger 接口文档的配置
- */
-
-/**
- * @author: shayu
- * @date: 2022/11/20
- * @ClassName: yupao-backend01
- * @Description: 自定义 Swagger 接口文档的配置
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @Configuration
 @EnableSwagger2WebMvc
-@Profile({"dev", "test"})   //版本控制访问
+@Profile({"dev", "test"})
 public class SwaggerConfig {
 
     @Bean(value = "defaultApi2")
@@ -41,6 +34,8 @@ public class SwaggerConfig {
                 .build();
     }
 
+    // [加入编程导航](https://t.zsxq.com/0emozsIJh) 深耕编程提升【两年半】、国内净值【最高】的编程社群、用心服务【20000+】求学者、帮你自学编程【不走弯路】
+
     /**
      * api 信息
      * @return
@@ -49,8 +44,8 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("鱼皮用户中心")
                 .description("鱼皮用户中心接口文档")
-                .termsOfServiceUrl("https://github.com/kongshier")
-                .contact(new Contact("shier", "https://blog.csdn.net/qq_56098191?spm=1000.2115.3001.5343","2927527234@qq.com"))
+                .termsOfServiceUrl("https://github.com/liyupi")
+                .contact(new Contact("yupi","https://github.com/liyupi","xxx@qq.com"))
                 .version("1.0")
                 .build();
     }

@@ -51,10 +51,10 @@ class UserServiceTest {
     @Test
     void userRegister() {
         // 注册用户
-        String userAccount = "12345678";
+        String userAccount = "2";
         String userPassword = "123456";
         String checkPassword = "123456";
-        String planetCode = "1";
+        String planetCode = "2";
 
     }
 
