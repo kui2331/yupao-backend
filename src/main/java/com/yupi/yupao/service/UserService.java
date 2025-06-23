@@ -54,6 +54,8 @@ public interface UserService extends IService<User> {
     int userLogout(HttpServletRequest request);
 
 
+    User getLoginUser(HttpServletRequest request);
+
     /**
      * 是否为管理员
      * @param request
@@ -82,4 +84,5 @@ public interface UserService extends IService<User> {
      * @return
      */
     int updateUser(User user, User loginUser);
+
 }

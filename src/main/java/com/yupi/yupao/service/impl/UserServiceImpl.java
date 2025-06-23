@@ -276,6 +276,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return this.baseMapper.updateById(user);
     }
 
+    @Override
+    public User getLoginUser(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        if (userObj == null) {
+            throw new BusinessException(ErrorCode.NO_AUTH);
+        }
+        return (User) userObj;
+    }
+
     /**
      * 是否为管理员
      * @param request
