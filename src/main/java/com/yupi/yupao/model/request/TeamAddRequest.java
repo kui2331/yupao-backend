@@ -1,6 +1,7 @@
-package com.yupi.yupao.model.domain.request;
+package com.yupi.yupao.model.request;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class TeamAddRequest implements Serializable {
     /**
      * 过期时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
 
 
