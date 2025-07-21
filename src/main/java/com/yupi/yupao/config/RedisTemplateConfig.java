@@ -29,6 +29,7 @@ public class RedisTemplateConfig {
         //设置Value的序列化
         redisTemplate.setValueSerializer(jsonRedisSerializer);
 
+        redisTemplate.setHashValueSerializer(jsonRedisSerializer); // 修复Hash存储
         return redisTemplate;
     }
 }

@@ -35,7 +35,8 @@ import static com.yupi.yupao.contant.UserConstant.USER_LOGIN_STATE;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = {"http://localhost:3000", "https://124.223.61.100", "http://localhost:8081"}, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000","http://124.223.61.100:3000"}, allowCredentials = "true")
+//@CrossOrigin(origins = {"http://localhost:8080/"},allowCredentials = "true")
 @Slf4j
 public class UserController {
 

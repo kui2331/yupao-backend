@@ -17,7 +17,7 @@ spring:
 #    username: yupi
 #    password: 12345678
     url: jdbc:mysql://localhost:3306/yupao
-    username: root
+    username: yupao
     password: hsp
 
 
@@ -25,8 +25,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  profiles:
-    active: dev
 
   # redis 配置
   redis:
@@ -39,8 +37,7 @@ server:
     context-path: /api
     session:
       cookie:
-        domain: localhost
-      timeout: 86400
+        domain: 124.223.61.100
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: false

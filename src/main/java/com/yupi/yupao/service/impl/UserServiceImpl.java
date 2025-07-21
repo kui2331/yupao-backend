@@ -326,12 +326,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return user;
     }
 
-    /**
-     * 推荐匹配用户
-     * @param num
-     * @param loginUser
-     * @return
-     */
 //    @Override
 //    public List<User> matchUsers(long num, User loginUser) {
 //        List<User> userList = this.list();
